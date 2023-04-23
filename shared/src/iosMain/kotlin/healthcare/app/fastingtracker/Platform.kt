@@ -1,9 +1,8 @@
 package healthcare.app.fastingtracker
 
-import platform.UIKit.UIDevice
+import platform.Foundation.NSDate
+import platform.Foundation.now
 
-class IOSPlatform: Platform {
-    override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
+actual class Platform actual constructor() {
+    actual val currentTime: String = NSDate.now().toString()
 }
-
-actual fun getPlatform(): Platform = IOSPlatform()

@@ -1,7 +1,13 @@
 package healthcare.app.fastingtracker
 
-class AndroidPlatform : Platform {
-    override val name: String = "Android ${android.os.Build.VERSION.SDK_INT}"
-}
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
-actual fun getPlatform(): Platform = AndroidPlatform()
+actual class Platform actual constructor() {
+    companion object {
+        private const val DEFAULT_FORMATTER = "yyyy-MM-dd HH:mm"
+    }
+
+    actual val currentTime: String = LocalDateTime.now().format(DateTimeFormatter.ofPattern(
+        DEFAULT_FORMATTER))
+}
