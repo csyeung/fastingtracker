@@ -1,9 +1,7 @@
 package healthcare.app.fastingtracker
 
-class Greeting {
-    private val platform: Platform = getPlatform()
-
+class Greeting(private val platform: Platform) {
     fun greet(): String {
-        return "Hello, ${platform.currentTime}!"
+        return platform.currentTime
     }
 }

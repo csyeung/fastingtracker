@@ -1,8 +1,8 @@
 package healthcare.app.fastingtracker.di
 
-import healthcare.app.fastingtracker.Greeting
+import healthcare.app.fastingtracker.Platform
 import org.koin.dsl.module
 
 val localDataSourceModule = module {
-    single { Greeting() }
+    single { Platform() }
 }

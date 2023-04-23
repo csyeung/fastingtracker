@@ -1,8 +1,5 @@
 package healthcare.app.fastingtracker
 
-interface Platform {
-    val name: String
+expect class Platform() {
     val currentTime: String
 }
-
-expect fun getPlatform(): Platform
