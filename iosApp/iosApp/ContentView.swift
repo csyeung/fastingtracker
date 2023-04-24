@@ -1,11 +1,30 @@
 import SwiftUI
-import shared
 
 struct ContentView: View {
-	let greet = Helper().greet()
-
 	var body: some View {
-		Text(greet)
+	    TabView {
+	        TrackerTabView()
+	            .tabItem {
+	                VStack {
+	                    Image(systemName: "Tracker")
+	                    Text("タイマー")
+	                }
+	            }.tag(1)
+	        CalendarTabView()
+	            .tabItem {
+	               VStack {
+	                   Image(systemName: "Calendar")
+                       Text("カレンター")
+	               }
+	            }.tag(2)
+	        SettingTabView()
+	            .tabItem {
+	                VStack {
+                        Image(systemName: "Setting")
+	                    Text("設定")
+	                }
+	            }.tag(3)
+	    }
 	}
 }
 
