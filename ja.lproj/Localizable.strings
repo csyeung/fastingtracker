@@ -11,3 +11,9 @@
 "Content.Setting.Title" = "設定";
 
 "Tracker.Title" = "断食タイマー";
+"Tracker.ElapsedTime" = "経過時間";
+"Tracker.RemainingTime" = "残り時間";
+"Tracker.StartTime" = "開始時刻";
+"Tracker.EndTime" = "終了時刻";
+"Tracker.Button.Title" = "断食スタート";
+

@@ -33,22 +33,72 @@ struct TrackerTabView: View {
     @State private var selectedFastingType = FastingType.sixteen
     
     var body: some View {
-        NavigationView {
-            List {
+        VStack {
+            VStack(alignment: .center) {
+                Text(NSLocalizedString("Tracker.Title", comment: ""))
+                    .font(Font(UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.semibold)))
+
                 Picker(FastingType.sixteen.rawValue, selection: $selectedFastingType) {
-                    ForEach(FastingType.allCases) {
-                        data in Text(data.rawValue).tag(data)
+                        ForEach(FastingType.allCases) {
+                            data in Text(data.rawValue).tag(data)
+                        }
                     }
+                    .colorMultiply(Color.white)
+                    .pickerStyle(.segmented)
+                    .padding()
+                
+                HStack {
+                    Text(NSLocalizedString("Tracker.ElapsedTime", comment: ""))
+                        .font(Font(UIFont.systemFont(ofSize: 26, weight: UIFont.Weight.semibold)))
+                    
+                    Spacer()
+                    
+                    Text("00:00:00")
+                        .font(Font(UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.regular)))
                 }
-                .colorMultiply(Color.white)
-                .pickerStyle(.segmented)
-                .padding()
+                
+                HStack {
+                    Text(NSLocalizedString("Tracker.RemainingTime", comment: ""))
+                        .font(Font(UIFont.systemFont(ofSize: 26, weight: UIFont.Weight.semibold)))
+                    
+                    Spacer()
+                    
+                    Text("00:00:00")
+                        .font(Font(UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.regular)))
+                }
+                
+                HStack {
+                    Text(NSLocalizedString("Tracker.StartTime", comment: ""))
+                        .font(Font(UIFont.systemFont(ofSize: 26, weight: UIFont.Weight.regular)))
+                    
+                    Spacer()
+                    
+                    Text("00:00")
+                        .font(Font(UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light)))
+                }
 
                 HStack {
+                    Text(NSLocalizedString("Tracker.EndTime", comment: ""))
+                        .font(Font(UIFont.systemFont(ofSize: 26, weight: UIFont.Weight.regular)))
+
+                    Spacer()
                     
+                    Text("00:00")
+                        .font(Font(UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light)))
                 }
-            }
-            .navigationTitle(NSLocalizedString("Tracker.Title", comment: ""))
+
+                Spacer()
+                
+                Button(NSLocalizedString("Tracker.Button.Title", comment: "")) {
+        
+                }
+                .padding(EdgeInsets.init(top: 20, leading: 15, bottom: 20, trailing: 15))
+                .background(Color.pink)
+                .cornerRadius(15)
+                .foregroundColor(Color.white)
+            }.padding()
+            
+            Spacer()
         }
     }
 }

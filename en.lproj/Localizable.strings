@@ -11,3 +11,8 @@
 "Content.Setting.Title" = "Setting";
 
 "Tracker.Title" = "Fasting Timer";
+"Tracker.ElapsedTime" = "Time Elapsed";
+"Tracker.RemainingTime" = "Time Remaining";
+"Tracker.StartTime" = "Start Time";
+"Tracker.EndTime" = "End Time";
+"Tracker.Button.Title" = "Start Fasting";
