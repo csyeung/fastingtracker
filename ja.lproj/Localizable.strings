@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  iosApp
+
+  Created by Jonathan Yeung on 25/4/2023.
+  Copyright © 2023 orgName. All rights reserved.
+*/
+
+"Content.Timer.Title" = "タイマー";
+"Content.Calendar.Title" = "カレンダー";
+"Content.Setting.Title" = "設定";
+
+"Tracker.Title" = "断食タイマー";
