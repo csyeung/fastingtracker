@@ -5,15 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
@@ -21,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,9 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -83,8 +74,9 @@ class MainActivity : ComponentActivity(), KoinComponent {
             Column(modifier = Modifier.fillMaxHeight()) {
                 when (selectedTabIndex) {
                     0 -> TimerScreen(text = text)
-                    1 -> CalendarScreen()
-                    2 -> SettingScreen()
+                    1 -> RecordScreen()
+                    2 -> CalendarScreen()
+                    3 -> SettingScreen()
                 }
             }
 
@@ -110,7 +102,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
                         Text(
                             text = stringResource(R.string.trackerTabTitle),
                             fontWeight = FontWeight.Bold,
-                            color = if (selectedTabIndex == 0) Color.White else Color.Gray
+                            color = if (selectedTabIndex == 0) MaterialTheme.colors.primary else Color.Gray
                         )
                     },
                     icon = {
@@ -127,9 +119,28 @@ class MainActivity : ComponentActivity(), KoinComponent {
                     },
                     text = {
                         Text(
+                            text = stringResource(R.string.recordTabTitle),
+                            fontWeight = FontWeight.Bold,
+                            color = if (selectedTabIndex == 1) MaterialTheme.colors.primary else Color.Gray
+                        )
+                    },
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Filled.Star,
+                            contentDescription = null
+                        )
+                    }
+                )
+                Tab(
+                    selected = selectedTabIndex == 2,
+                    onClick = {
+                        selectedTabIndex = 2
+                    },
+                    text = {
+                        Text(
                             text = stringResource(R.string.calendarTabTitle),
                             fontWeight = FontWeight.Bold,
-                            color = if (selectedTabIndex == 1) Color.White else Color.Gray
+                            color = if (selectedTabIndex == 2) MaterialTheme.colors.primary else Color.Gray
                         )
                     },
                     icon = {
@@ -140,15 +151,15 @@ class MainActivity : ComponentActivity(), KoinComponent {
                     }
                 )
                 Tab(
-                    selected = selectedTabIndex == 1,
+                    selected = selectedTabIndex == 3,
                     onClick = {
-                        selectedTabIndex = 2
+                        selectedTabIndex = 3
                     },
                     text = {
                         Text(
                             text = stringResource(R.string.settingTabTitle),
                             fontWeight = FontWeight.Bold,
-                            color = if (selectedTabIndex == 2) Color.White else Color.Gray
+                            color = if (selectedTabIndex == 3) MaterialTheme.colors.primary else Color.Gray
                         )
                     },
                     icon = {
@@ -330,6 +341,11 @@ class MainActivity : ComponentActivity(), KoinComponent {
                 )
             }
         }
+    }
+
+    @Composable
+    fun RecordScreen() {
+
     }
 
     @Composable

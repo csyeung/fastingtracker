@@ -12,6 +12,15 @@ struct ContentView: View {
                         )
 	                }
 	            }.tag(1)
+	        RecordTabView()
+	            .tabItem {
+	               VStack {
+	                   Image(systemName: "menubar.dock.rectangle.badge.record")
+                       Text(
+                        NSLocalizedString("Content.Record.Title", comment: "")
+                       )
+	               }
+	            }.tag(2)
 	        CalendarTabView()
 	            .tabItem {
 	               VStack {
@@ -20,7 +29,7 @@ struct ContentView: View {
                         NSLocalizedString("Content.Calendar.Title", comment: "")
                        )
 	               }
-	            }.tag(2)
+	            }.tag(3)
 	        SettingTabView()
 	            .tabItem {
 	                VStack {
@@ -29,7 +38,7 @@ struct ContentView: View {
                             NSLocalizedString("Content.Setting.Title", comment: "")
                         )
 	                }
-	            }.tag(3)
+	            }.tag(4)
 	    }
 	}
 }

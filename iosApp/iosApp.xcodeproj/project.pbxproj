@@ -15,6 +15,7 @@
 		AB31932229F7EFD4003EB34F /* TrackerTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB31931F29F7EFD4003EB34F /* TrackerTabView.swift */; };
 		AB31932329F7EFD4003EB34F /* CalendarTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB31932029F7EFD4003EB34F /* CalendarTabView.swift */; };
 		AB31932629F7F211003EB34F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB31932829F7F211003EB34F /* Localizable.strings */; };
+		ABEC233129FAA67800EB4B73 /* RecordTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEC233029FAA67800EB4B73 /* RecordTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +43,7 @@
 		AB31932029F7EFD4003EB34F /* CalendarTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTabView.swift; sourceTree = "<group>"; };
 		AB31932729F7F211003EB34F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AB31932929F7F24B003EB34F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ABEC233029FAA67800EB4B73 /* RecordTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		AB31931D29F7EFD4003EB34F /* presentation */ = {
 			isa = PBXGroup;
 			children = (
+				ABEC233029FAA67800EB4B73 /* RecordTabView.swift */,
 				AB31932029F7EFD4003EB34F /* CalendarTabView.swift */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				AB31931E29F7EFD4003EB34F /* SettingTabView.swift */,
@@ -210,6 +213,7 @@
 				AB31932229F7EFD4003EB34F /* TrackerTabView.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				AB31932129F7EFD4003EB34F /* SettingTabView.swift in Sources */,
+				ABEC233129FAA67800EB4B73 /* RecordTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

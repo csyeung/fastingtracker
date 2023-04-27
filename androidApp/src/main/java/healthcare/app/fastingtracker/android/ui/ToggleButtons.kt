@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import healthcare.app.fastingtracker.android.R
 
 @Composable
@@ -54,6 +55,7 @@ fun SelectionPill(
                 } else {
                     colorResource(id = R.color.colorButtonBackGroundDisable)
                 },
+                fontSize = 24.sp,
                 modifier = Modifier
                     .padding(0.dp)
                     .align(Alignment.CenterVertically),

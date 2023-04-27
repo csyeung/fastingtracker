@@ -7,6 +7,7 @@
 */
 
 "Content.Timer.Title" = "Tracker";
+"Content.Record.Title" = "Calendar";
 "Content.Calendar.Title" = "Calendar";
 "Content.Setting.Title" = "Setting";
 

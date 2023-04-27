@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">断食トラッカー</string>
     <string name="trackerTabTitle">タイマー</string>
+    <string name="recordTabTitle">記録</string>
     <string name="calendarTabTitle">カレンダー</string>
     <string name="settingTabTitle">設定</string>
     <string name="timeOption1" translatable="false">16:8</string>

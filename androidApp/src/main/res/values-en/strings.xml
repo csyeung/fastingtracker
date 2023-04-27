@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fasting Tracker</string>
+    <string name="trackerTabTitle">Timer</string>
+    <string name="calendarTabTitle">Calendar</string>
+    <string name="settingTabTitle">Setting</string>
+    <string name="trackerTitleElapsedTime">Elapsed Time</string>
+    <string name="trackerTitleRemainingTime">Remaining Time</string>
+    <string name="trackerTitleStartTime">Start Time</string>
+    <string name="trackerTitleEndTime">Finish Time</string>
+    <string name="trackerStart">Fasting Start</string>
+    <string name="trackerEnd">Fasting Finished</string>
+    <string name="recordTabTitle">Record</string>
+</resources>
