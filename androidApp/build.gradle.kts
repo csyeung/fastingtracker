@@ -21,22 +21,17 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.4"
     }
-    fun Packaging.() {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
 
@@ -49,4 +44,5 @@ dependencies {
     implementation("androidx.compose.material:material:1.4.2")
     implementation("androidx.activity:activity-compose:1.7.1")
     implementation("io.insert-koin:koin-android:3.2.0")
+    implementation("androidx.core:core-ktx:1.10.0")
 }

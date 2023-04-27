@@ -6,3 +6,5 @@ import platform.Foundation.now
 actual class Platform actual constructor() {
     actual val currentTime: String = NSDate.now().toString()
 }
+
+actual interface CommonParcelable

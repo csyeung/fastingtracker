@@ -1,6 +1,8 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    kotlin("plugin.serialization")
+    id("kotlin-parcelize")
 }
 
 kotlin {
@@ -26,6 +28,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("io.insert-koin:koin-core:3.2.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
             }
         }
         val commonTest by getting {
@@ -62,4 +65,8 @@ android {
     defaultConfig {
         minSdk = 28
     }
+}
+
+dependencies {
+    implementation("androidx.core:core-ktx:1.10.0")
 }
