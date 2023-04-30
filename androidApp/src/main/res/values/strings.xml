@@ -15,4 +15,6 @@
     <string name="trackerPlaceholderTime2" translatable="false">00:00</string>
     <string name="trackerStart">断食開始</string>
     <string name="trackerEnd">断食終了</string>
+
+    <string name="defaultEmptyMessage" translatable="false">-</string>
 </resources>

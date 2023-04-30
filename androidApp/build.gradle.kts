@@ -1,5 +1,3 @@
-import com.android.build.api.dsl.Packaging
-
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -45,4 +43,6 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.7.1")
     implementation("io.insert-koin:koin-android:3.2.0")
     implementation("androidx.core:core-ktx:1.10.0")
+    // Integration with ViewModels
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
 }

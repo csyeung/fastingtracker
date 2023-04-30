@@ -9,6 +9,8 @@ import healthcare.app.fastingtracker.CommonParcelize
  */
 @CommonParcelize
 data class FastingRecord(
-    val startTime: String? = null, // TODO: Move to DateTime
-    val fastType: Int? = null,
+    val startTime: String? = null,
+    val endTime: String? = null,
+    val elapsedTime: String? = null,
+    val remainingTime: String? = null,
 ) : CommonParcelable

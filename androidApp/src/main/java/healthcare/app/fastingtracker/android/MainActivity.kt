@@ -15,6 +15,8 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,24 +28,22 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import healthcare.app.fastingtracker.Greeting
-import healthcare.app.fastingtracker.android.ui.SelectionType
-import healthcare.app.fastingtracker.android.ui.ToggleButton
-import healthcare.app.fastingtracker.android.ui.ToggleButtonOption
+import healthcare.app.fastingtracker.android.ui.SegmentedControl
+import healthcare.app.fastingtracker.android.ui.state.MainUiState
+import kotlinx.coroutines.delay
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.time.Duration.Companion.seconds
 
 class MainActivity : ComponentActivity(), KoinComponent {
-    // TODO: Move to presenter
-    private val greeting: Greeting by inject()
-
     companion object {
         private val TAB_HEIGHT = 72.dp
         private val INDICATOR_HEIGHT = 4.dp
     }
+
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,19 +53,21 @@ class MainActivity : ComponentActivity(), KoinComponent {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    GreetingView(greeting.greet())
+                    TabLayout()
                 }
             }
         }
+
+        initData()
+    }
+
+    private fun initData() {
+        // TODO: Fetch Data from datasource to see if it is started or stopped
+        viewModel.fetchData()
     }
 
     @Composable
-    fun GreetingView(text: String) {
-        TabLayout(text = text)
-    }
-
-    @Composable
-    fun TabLayout(text: String) {
+    fun TabLayout() {
         var selectedTabIndex by remember { mutableStateOf(0) }
 
         Box(
@@ -73,7 +75,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
         ) {
             Column(modifier = Modifier.fillMaxHeight()) {
                 when (selectedTabIndex) {
-                    0 -> TimerScreen(text = text)
+                    0 -> TimerScreen()
                     1 -> RecordScreen()
                     2 -> CalendarScreen()
                     3 -> SettingScreen()
@@ -185,26 +187,44 @@ class MainActivity : ComponentActivity(), KoinComponent {
     }
 
     @Composable
-    fun TimerScreen(text: String) {
-        val options = arrayOf(
-            ToggleButtonOption(
-                getString(R.string.timeOption1),
-            ),
-            ToggleButtonOption(
-                getString(R.string.timeOption2),
-            ),
-        )
-
-        ToggleButton(
-            options = options,
-            type = SelectionType.SINGLE,
-            modifier = Modifier
-                .padding(40.dp)
-                .fillMaxWidth(),
-            onClick = {
-
+    fun TimerTaskComposable(state: MainUiState) {
+        if (state is MainUiState.Fasting) {
+            LaunchedEffect(Unit) {
+                while (true) {
+                    delay(1.seconds)
+                    viewModel.updateFasting()
+                }
             }
+        }
+    }
+
+    @Composable
+    fun TimerScreen() {
+        val options = listOf(
+            getString(R.string.timeOption1),
+            getString(R.string.timeOption2),
         )
+
+        val state = viewModel.uiState.collectAsState()
+        val record = viewModel.record.collectAsState()
+
+        TimerTaskComposable(state = state.value)
+
+        if (state.value == MainUiState.Loading) {
+            CircularProgressIndicator()
+        }
+
+        Column(modifier = Modifier
+            .fillMaxWidth()
+        ) {
+            SegmentedControl(
+                items = options,
+                useFixedWidth = true,
+                cornerRadius = 20,
+                itemWidth = 200.dp,
+                onItemSelection = {}
+            )
+        }
 
         Column(
             modifier = Modifier
@@ -225,7 +245,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
                 modifier = Modifier
                     .padding(end = 10.dp)
                     .align(Alignment.End),
-                text = getString(R.string.trackerPlaceholderTime1),
+                text = record.value?.elapsedTime ?: getString(R.string.trackerPlaceholderTime1),
                 color = MaterialTheme.colors.primary,
                 fontSize = 28.sp,
                 fontFamily = FontFamily.Monospace,
@@ -252,7 +272,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
                 modifier = Modifier
                     .padding(end = 10.dp)
                     .align(Alignment.End),
-                text = getString(R.string.trackerPlaceholderTime1),
+                text = record.value?.remainingTime ?: getString(R.string.trackerPlaceholderTime1),
                 color = MaterialTheme.colors.primary,
                 fontSize = 28.sp,
                 fontFamily = FontFamily.Monospace,
@@ -279,7 +299,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
                 modifier = Modifier
                     .padding(end = 10.dp)
                     .align(Alignment.End),
-                text = getString(R.string.trackerPlaceholderTime2),
+                text = record.value?.startTime ?: getString(R.string.trackerPlaceholderTime2),
                 color = MaterialTheme.colors.primary,
                 fontSize = 20.sp,
                 fontFamily = FontFamily.Monospace,
@@ -306,7 +326,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
                 modifier = Modifier
                     .padding(end = 10.dp)
                     .align(Alignment.End),
-                text = getString(R.string.trackerPlaceholderTime2),
+                text = record.value?.endTime ?: getString(R.string.trackerPlaceholderTime2),
                 color = MaterialTheme.colors.primary,
                 fontSize = 20.sp,
                 fontFamily = FontFamily.Monospace,
@@ -320,7 +340,12 @@ class MainActivity : ComponentActivity(), KoinComponent {
                 .padding(20.dp)
         ) {
             OutlinedButton(
-                onClick = { },
+                onClick = {
+                    when (state.value) {
+                        MainUiState.Fasting -> viewModel.stopFasting()
+                        else -> viewModel.startFasting()
+                    }
+                },
                 border = BorderStroke(
                     1.dp,
                     colorResource(id = R.color.colorButtonBackGroundDisable)
@@ -335,7 +360,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
                     .align(Alignment.CenterHorizontally),
             ) {
                 Text(
-                    text = getString(R.string.trackerStart),
+                    text = getButtonText(state.value),
                     color = colorResource(id = R.color.colorButtonBackGroundEnable),
                     fontSize = 20.sp
                 )
@@ -343,6 +368,15 @@ class MainActivity : ComponentActivity(), KoinComponent {
         }
     }
 
+    private fun getButtonText(state: MainUiState) = when (state) {
+        is MainUiState.Start -> getString(R.string.trackerStart)
+        is MainUiState.Fasting -> getString(R.string.trackerEnd)
+        else -> getString(R.string.defaultEmptyMessage)
+    }
+
+    /**
+     * Record Screen Session
+     */
     @Composable
     fun RecordScreen() {
 
@@ -356,13 +390,5 @@ class MainActivity : ComponentActivity(), KoinComponent {
     @Composable
     fun SettingScreen() {
 
-    }
-
-    @Preview
-    @Composable
-    fun DefaultPreview() {
-        MyApplicationTheme {
-            GreetingView("Hello, Android!")
-        }
     }
 }

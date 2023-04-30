@@ -29,6 +29,11 @@ kotlin {
             dependencies {
                 implementation("io.insert-koin:koin-core:3.2.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.3")
+                // Data Store
+                api("androidx.datastore:datastore-preferences-core:1.1.0-alpha04")
+                api("androidx.datastore:datastore-core-okio:1.1.0-alpha04")
             }
         }
         val commonTest by getting {
@@ -65,8 +70,4 @@ android {
     defaultConfig {
         minSdk = 28
     }
-}
-
-dependencies {
-    implementation("androidx.core:core-ktx:1.10.0")
 }
