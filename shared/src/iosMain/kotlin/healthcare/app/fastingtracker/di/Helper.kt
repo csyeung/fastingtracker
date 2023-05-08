@@ -1,7 +1,9 @@
 package healthcare.app.fastingtracker.di
 
 import healthcare.app.fastingtracker.domain.usecase.Greeting
+import healthcare.app.fastingtracker.getModule
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
 
@@ -16,7 +18,6 @@ fun initKoin() {
 }
 
 // Injection Bootstrap Helper
-class Helper : KoinComponent {
-    private val greeting: Greeting by inject()
-    fun greet(): String = greeting.greet()
+object GetUseCases : KoinComponent {
+    fun getGreeting() = Greeting(get(), get())
 }

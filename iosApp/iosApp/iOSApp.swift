@@ -1,11 +1,9 @@
 import SwiftUI
-import shared
 
 @main
 struct iOSApp: App {
-    // KMM - Koin Call
 	init() {
-    	HelperKt.doInitKoin()
+        startKoin()
 	}
 
 	var body: some Scene {

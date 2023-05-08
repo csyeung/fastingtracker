@@ -31,7 +31,8 @@ struct TrackerTabView: View {
     }
     
     @State private var selectedFastingType = FastingType.sixteen
-    
+    @ObservedObject private var viewModel = TrackingTabViewModel()
+
     var body: some View {
         VStack {
             VStack(alignment: .center) {
@@ -53,7 +54,7 @@ struct TrackerTabView: View {
                     
                     Spacer()
                     
-                    Text("00:00:00")
+                    Text(viewModel.elapsedTime)
                         .font(Font(UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.regular)))
                 }
                 
@@ -63,7 +64,7 @@ struct TrackerTabView: View {
                     
                     Spacer()
                     
-                    Text("00:00:00")
+                    Text(viewModel.remainingTime)
                         .font(Font(UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.regular)))
                 }
                 
@@ -73,7 +74,7 @@ struct TrackerTabView: View {
                     
                     Spacer()
                     
-                    Text("00:00")
+                    Text(viewModel.startTime)
                         .font(Font(UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light)))
                 }
 
@@ -83,14 +84,14 @@ struct TrackerTabView: View {
 
                     Spacer()
                     
-                    Text("00:00")
+                    Text(viewModel.finishTime)
                         .font(Font(UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light)))
                 }
 
                 Spacer()
                 
                 Button(NSLocalizedString("Tracker.Button.Title", comment: "")) {
-        
+                    viewModel.startFasting()
                 }
                 .padding(EdgeInsets.init(top: 20, leading: 15, bottom: 20, trailing: 15))
                 .background(Color.pink)
@@ -99,7 +100,14 @@ struct TrackerTabView: View {
             }.padding()
             
             Spacer()
+        }.onAppear {
+            registerObservables()
         }
+    }
+    
+    private func registerObservables() {
+//        viewModel.fetchData()
+            viewModel.updateFasting()
     }
 }
 

@@ -11,9 +11,16 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class LocalDataStoreRepository(
+interface LocalDataStoreRepository {
+    val startTrackingTime: Flow<String>
+    fun saveStartTrackingTime(trackingTime: String)
+    fun clearStartTrackingTime()
+    suspend fun hasStartTrackingTime(): Boolean
+}
+
+class LocalDataStoreRepositoryImpl(
     private val dataStore: DataStore<Preferences>
-) {
+) : LocalDataStoreRepository {
     companion object {
         private const val KEY_START_TRACKING_TIME = "start_tracking_time"
     }
@@ -25,11 +32,11 @@ class LocalDataStoreRepository(
      */
     private val startTrackingTimeKey = stringPreferencesKey(KEY_START_TRACKING_TIME)
 
-    internal val startTrackingTime: Flow<String> = dataStore.data.map {
+    override val startTrackingTime: Flow<String> = dataStore.data.map {
         it[startTrackingTimeKey] ?: ""
     }
 
-    fun saveStartTrackingTime(trackingTime: String) {
+    override fun saveStartTrackingTime(trackingTime: String) {
         scope.launch {
             dataStore.edit {
                 it[startTrackingTimeKey] = trackingTime
@@ -37,7 +44,7 @@ class LocalDataStoreRepository(
         }
     }
 
-    fun clearStartTrackingTime() {
+    override fun clearStartTrackingTime() {
         scope.launch {
             dataStore.edit {
                 if (it.contains(startTrackingTimeKey)) {
@@ -47,7 +54,7 @@ class LocalDataStoreRepository(
         }
     }
 
-    suspend fun hasStartTrackingTime(): Boolean {
+    override suspend fun hasStartTrackingTime(): Boolean {
         return dataStore.data.stateIn(scope).value.contains(startTrackingTimeKey)
     }
 }
