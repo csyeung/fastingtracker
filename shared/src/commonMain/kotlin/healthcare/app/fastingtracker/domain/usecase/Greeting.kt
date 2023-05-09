@@ -3,9 +3,9 @@ package healthcare.app.fastingtracker.domain.usecase
 import healthcare.app.fastingtracker.Platform
 import healthcare.app.fastingtracker.domain.model.FastingRecord
 import healthcare.app.fastingtracker.domain.repository.LocalDataStoreRepository
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.Instant
@@ -20,25 +20,28 @@ class Greeting(private val platform: Platform, private val dataStore: LocalDataS
     }
 
     val updateFastingRecord: Flow<FastingRecord> =
-        channelFlow {
-            dataStore.startTrackingTime.collectLatest {
-                if (it.isNotEmpty()) {
-                    // Format: 2015-12-31T12:30:00Z
-                    // To Resume: Instant.parse("2015-12-31T12:30:00Z")
-                    val startTime = Instant.parse(it)
-                    val endTime = getEndTime(startTime)
-                    val recent = Clock.System.now()
-                    val remainingTime = endTime - recent
-                    val elapsedTime = DEFAULT_FASTING_PERIOD * 3600 - remainingTime.toInt(DurationUnit.SECONDS)
+        flow {
+            coroutineScope {
+                dataStore.startTrackingTime.collect {
+                    if (it.isNotEmpty()) {
+                        // Format: 2015-12-31T12:30:00Z
+                        // To Resume: Instant.parse("2015-12-31T12:30:00Z")
+                        val startTime = Instant.parse(it)
+                        val endTime = getEndTime(startTime)
+                        val recent = Clock.System.now()
+                        val remainingTime = endTime - recent
+                        val elapsedTime =
+                            DEFAULT_FASTING_PERIOD * 3600 - remainingTime.toInt(DurationUnit.SECONDS)
 
-                    send(
-                        FastingRecord(
-                            startTime = startTime.toString(),
-                            endTime = getEndTimeString(endTime),
-                            elapsedTime = elapsedTime.toString(),
-                            remainingTime = remainingTime.toString()
+                        emit(
+                            FastingRecord(
+                                startTime = startTime.toString(),
+                                endTime = getEndTimeString(endTime),
+                                elapsedTime = elapsedTime.toString(),
+                                remainingTime = remainingTime.toString()
+                            )
                         )
-                    )
+                    }
                 }
             }
         }
