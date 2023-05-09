@@ -17,3 +17,4 @@
 "Tracker.StartTime" = "Start Time";
 "Tracker.EndTime" = "End Time";
 "Tracker.Button.Title" = "Start Fasting";
+"Tracker.Button.TitleEnd" = "Stop Fasting";

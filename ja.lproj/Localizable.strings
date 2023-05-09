@@ -17,4 +17,5 @@
 "Tracker.StartTime" = "開始時刻";
 "Tracker.EndTime" = "終了時刻";
 "Tracker.Button.Title" = "断食スタート";
+"Tracker.Button.TitleEnd" = "断食終了";
 

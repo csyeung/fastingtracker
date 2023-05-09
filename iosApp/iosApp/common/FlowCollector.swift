@@ -7,6 +7,7 @@
 import SwiftUI
 import shared
 
+@MainActor
 class FlowCollector<T> : Kotlinx_coroutines_coreFlowCollector {
     let callback:(T) -> Void
 
@@ -16,7 +17,7 @@ class FlowCollector<T> : Kotlinx_coroutines_coreFlowCollector {
 
     func emit(value: Any?) async throws -> Void   {
         if let updatedValue = value as? T {
-          callback(updatedValue)
+            callback(updatedValue)
         }
         return Void()
     }

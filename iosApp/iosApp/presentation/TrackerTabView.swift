@@ -54,7 +54,7 @@ struct TrackerTabView: View {
                     
                     Spacer()
                     
-                    Text(viewModel.elapsedTime)
+                    Text(viewModel.elapsedTime ?? "-")
                         .font(Font(UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.regular)))
                 }
                 
@@ -64,7 +64,7 @@ struct TrackerTabView: View {
                     
                     Spacer()
                     
-                    Text(viewModel.remainingTime)
+                    Text(viewModel.remainingTime ?? "-")
                         .font(Font(UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.regular)))
                 }
                 
@@ -74,7 +74,7 @@ struct TrackerTabView: View {
                     
                     Spacer()
                     
-                    Text(viewModel.startTime)
+                    Text(viewModel.startTime ?? "-")
                         .font(Font(UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light)))
                 }
 
@@ -84,19 +84,33 @@ struct TrackerTabView: View {
 
                     Spacer()
                     
-                    Text(viewModel.finishTime)
+                    Text(viewModel.finishTime ?? "-")
                         .font(Font(UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.light)))
                 }
 
                 Spacer()
                 
-                Button(NSLocalizedString("Tracker.Button.Title", comment: "")) {
-                    viewModel.startFasting()
+                // TODO: Learn proper SwiftUI Syntax here
+                if (viewModel.uiState == .Fasting) {
+                    Button(                    NSLocalizedString("Tracker.Button.TitleEnd", comment: "")
+                    ) {
+                        viewModel.stopFasting()
+                    }
+                    .padding(EdgeInsets.init(top: 20, leading: 15, bottom: 20, trailing: 15))
+                    .background(Color.pink)
+                    .cornerRadius(15)
+                    .foregroundColor(Color.white)
+                } else {
+                    Button(
+                        NSLocalizedString("Tracker.Button.Title", comment: "")
+                    ) {
+                        viewModel.startFasting()
+                    }
+                    .padding(EdgeInsets.init(top: 20, leading: 15, bottom: 20, trailing: 15))
+                    .background(Color.pink)
+                    .cornerRadius(15)
+                    .foregroundColor(Color.white)
                 }
-                .padding(EdgeInsets.init(top: 20, leading: 15, bottom: 20, trailing: 15))
-                .background(Color.pink)
-                .cornerRadius(15)
-                .foregroundColor(Color.white)
             }.padding()
             
             Spacer()
