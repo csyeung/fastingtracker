@@ -107,7 +107,9 @@ struct TrackerTabView: View {
     
     private func registerObservables() {
 //        viewModel.fetchData()
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             viewModel.updateFasting()
+        }
     }
 }
 
