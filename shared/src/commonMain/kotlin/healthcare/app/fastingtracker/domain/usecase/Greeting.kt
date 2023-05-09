@@ -12,6 +12,7 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Duration
 import kotlin.time.DurationUnit
 
 class Greeting(private val platform: Platform, private val dataStore: LocalDataStoreRepository) {
@@ -35,10 +36,10 @@ class Greeting(private val platform: Platform, private val dataStore: LocalDataS
 
                         emit(
                             FastingRecord(
-                                startTime = startTime.toString(),
-                                endTime = getEndTimeString(endTime),
-                                elapsedTime = elapsedTime.toString(),
-                                remainingTime = remainingTime.toString()
+                                startTime = getFormattedTimeString(startTime),
+                                endTime = getFormattedTimeString(endTime),
+                                elapsedTime = formatElapsedTime(elapsedTime),
+                                remainingTime = formatDuration(remainingTime)
                             )
                         )
                     }
@@ -46,14 +47,33 @@ class Greeting(private val platform: Platform, private val dataStore: LocalDataS
             }
         }
 
-    private fun getEndTime(recent: Instant): Instant {
-        val timeZone = TimeZone.currentSystemDefault()
-        return recent.plus(DEFAULT_FASTING_PERIOD, DateTimeUnit.HOUR, timeZone)
+    private fun getFormattedTimeString(recent: Instant): String {
+        val localDateTime = recent.toLocalDateTime(TimeZone.currentSystemDefault())
+        return "${localDateTime.date} ${formatNumberString(localDateTime.hour)}:${formatNumberString(localDateTime.minute)}:${formatNumberString(localDateTime.second)}"
     }
 
-    private fun getEndTimeString(endTime: Instant): String {
-        val timeZone = TimeZone.currentSystemDefault()
-        return endTime.toLocalDateTime(timeZone).toString()
+    private fun formatNumberString(number: Int): String {
+        return (if (number < 10) "0" else "") + number
+    }
+
+    private fun formatElapsedTime(number: Int): String {
+        val hour = number / 3600
+        val minute = (number - (3600 * hour)) / 60
+        val second = (number - (3600 * hour) - (60 * minute))
+
+        return "${formatNumberString(hour)}:${formatNumberString(minute)}:${formatNumberString(second)}"
+    }
+
+    private fun formatDuration(duration: Duration): String {
+        return if (duration.isNegative()) {
+            "(${formatElapsedTime(duration.toInt(DurationUnit.SECONDS).unaryMinus())})"
+        } else {
+            formatElapsedTime(duration.toInt(DurationUnit.SECONDS))
+        }
+    }
+
+    private fun getEndTime(recent: Instant): Instant {
+        return recent.plus(DEFAULT_FASTING_PERIOD, DateTimeUnit.HOUR, TimeZone.currentSystemDefault())
     }
 
     fun greet(): String {
