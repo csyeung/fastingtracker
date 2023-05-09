@@ -1,5 +1,6 @@
 package healthcare.app.fastingtracker
 
+import healthcare.app.fastingtracker.domain.usecase.Greeting
 import kotlin.test.Test
 import kotlin.test.assertTrue
 

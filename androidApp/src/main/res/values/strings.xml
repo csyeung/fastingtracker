@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">断食トラッカー</string>
+    <string name="trackerTabTitle">タイマー</string>
+    <string name="recordTabTitle">記録</string>
+    <string name="calendarTabTitle">カレンダー</string>
+    <string name="settingTabTitle">設定</string>
+    <string name="timeOption1" translatable="false">16:8</string>
+    <string name="timeOption2" translatable="false">12:12</string>
+    <string name="trackerTitleElapsedTime">経過時間</string>
+    <string name="trackerTitleRemainingTime">残り時間</string>
+    <string name="trackerTitleStartTime">開始時刻</string>
+    <string name="trackerTitleEndTime">終了時刻</string>
+    <string name="trackerPlaceholderTime1" translatable="false">00:00:00</string>
+    <string name="trackerPlaceholderTime2" translatable="false">00:00</string>
+    <string name="trackerStart">断食開始</string>
+    <string name="trackerEnd">断食終了</string>
+
+    <string name="defaultEmptyMessage" translatable="false">-</string>
+</resources>

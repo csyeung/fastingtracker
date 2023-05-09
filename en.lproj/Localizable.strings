@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  iosApp
+
+  Created by Jonathan Yeung on 25/4/2023.
+  Copyright © 2023 orgName. All rights reserved.
+*/
+
+"Content.Timer.Title" = "Tracker";
+"Content.Record.Title" = "Calendar";
+"Content.Calendar.Title" = "Calendar";
+"Content.Setting.Title" = "Setting";
+
+"Tracker.Title" = "Fasting Timer";
+"Tracker.ElapsedTime" = "Time Elapsed";
+"Tracker.RemainingTime" = "Time Remaining";
+"Tracker.StartTime" = "Start Time";
+"Tracker.EndTime" = "End Time";
+"Tracker.Button.Title" = "Start Fasting";
+"Tracker.Button.TitleEnd" = "Stop Fasting";

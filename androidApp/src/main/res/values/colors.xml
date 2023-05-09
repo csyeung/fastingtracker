@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorButtonBackGroundEnable">#ff2e63</color>
+    <color name="colorButtonBackGroundDisable">#66ff2e63</color>
+</resources>
