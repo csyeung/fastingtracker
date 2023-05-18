@@ -2,7 +2,12 @@ import SwiftUI
 
 struct CalendarTabView: View {
     var body: some View {
-        Text("Calendar")
+        VStack {
+            CalendarView()
+            Divider()
+            Text("Calendar View")
+                .frame(height: 300, alignment: .bottom)
+        }
     }
 }
 

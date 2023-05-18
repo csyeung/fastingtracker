@@ -15,6 +15,8 @@
 		AB31932229F7EFD4003EB34F /* TrackerTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB31931F29F7EFD4003EB34F /* TrackerTabView.swift */; };
 		AB31932329F7EFD4003EB34F /* CalendarTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB31932029F7EFD4003EB34F /* CalendarTabView.swift */; };
 		AB31932629F7F211003EB34F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB31932829F7F211003EB34F /* Localizable.strings */; };
+		AB718DF72A164401007D3786 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB718DF62A164401007D3786 /* CalendarView.swift */; };
+		AB718DF92A164594007D3786 /* CalendarTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB718DF82A164594007D3786 /* CalendarTabViewModel.swift */; };
 		ABA908912A093BDD00876129 /* FlowCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA908902A093BDD00876129 /* FlowCollector.swift */; };
 		ABCD8F9C2A06A2E700C093C8 /* TrackingTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCD8F9B2A06A2E700C093C8 /* TrackingTabViewModel.swift */; };
 		ABCD8F9F2A06A7A200C093C8 /* TrackingUiState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCD8F9E2A06A7A200C093C8 /* TrackingUiState.swift */; };
@@ -47,6 +49,8 @@
 		AB31932029F7EFD4003EB34F /* CalendarTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTabView.swift; sourceTree = "<group>"; };
 		AB31932729F7F211003EB34F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AB31932929F7F24B003EB34F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AB718DF62A164401007D3786 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		AB718DF82A164594007D3786 /* CalendarTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTabViewModel.swift; sourceTree = "<group>"; };
 		ABA908902A093BDD00876129 /* FlowCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCollector.swift; sourceTree = "<group>"; };
 		ABCD8F9B2A06A2E700C093C8 /* TrackingTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingTabViewModel.swift; sourceTree = "<group>"; };
 		ABCD8F9E2A06A7A200C093C8 /* TrackingUiState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingUiState.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				ABA908902A093BDD00876129 /* FlowCollector.swift */,
+				AB718DF62A164401007D3786 /* CalendarView.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				ABCD8F9B2A06A2E700C093C8 /* TrackingTabViewModel.swift */,
+				AB718DF82A164594007D3786 /* CalendarTabViewModel.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -189,7 +195,7 @@
 				};
 			};
 			buildConfigurationList = 7555FF76242A565900829871 /* Build configuration list for PBXProject "iosApp" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = ja;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -248,10 +254,12 @@
 			files = (
 				ABA908912A093BDD00876129 /* FlowCollector.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				AB718DF92A164594007D3786 /* CalendarTabViewModel.swift in Sources */,
 				ABCD8F9C2A06A2E700C093C8 /* TrackingTabViewModel.swift in Sources */,
 				ABCD8F9F2A06A7A200C093C8 /* TrackingUiState.swift in Sources */,
 				AB31932329F7EFD4003EB34F /* CalendarTabView.swift in Sources */,
 				ABCD8FA12A06AB8C00C093C8 /* Injector.swift in Sources */,
+				AB718DF72A164401007D3786 /* CalendarView.swift in Sources */,
 				AB31932229F7EFD4003EB34F /* TrackerTabView.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				AB31932129F7EFD4003EB34F /* SettingTabView.swift in Sources */,
@@ -409,6 +417,7 @@
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Fasting Tracker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -443,6 +452,7 @@
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Fasting Tracker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
