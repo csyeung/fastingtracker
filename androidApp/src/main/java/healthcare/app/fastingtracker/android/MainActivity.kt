@@ -30,6 +30,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 import healthcare.app.fastingtracker.android.ui.SegmentedControl
 import healthcare.app.fastingtracker.android.ui.state.MainUiState
 import kotlinx.coroutines.delay
@@ -389,6 +393,11 @@ class MainActivity : ComponentActivity(), KoinComponent {
 
     @Composable
     fun SettingScreen() {
-
+        val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.my_lottie_file))
+        LottieAnimation(
+            modifier = Modifier.fillMaxSize(),
+            composition = composition,
+            iterations = LottieConstants.IterateForever,
+        )
     }
 }
