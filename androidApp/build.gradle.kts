@@ -47,4 +47,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     // Animation
     implementation("com.airbnb.android:lottie-compose:4.2.1")
+    // Calendar (2.3.0 to Compose UI 1.4.x, check library page for details)
+    implementation("com.kizitonwose.calendar:compose:2.3.0")
 }

@@ -5,10 +5,27 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedButton
+import androidx.compose.material.Surface
+import androidx.compose.material.Tab
+import androidx.compose.material.TabPosition
+import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
@@ -34,11 +51,18 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.kizitonwose.calendar.compose.HorizontalCalendar
+import com.kizitonwose.calendar.compose.rememberCalendarState
+import com.kizitonwose.calendar.core.OutDateStyle
+import com.kizitonwose.calendar.core.daysOfWeek
+import healthcare.app.fastingtracker.android.ui.Day
+import healthcare.app.fastingtracker.android.ui.DaysOfWeekTitle
 import healthcare.app.fastingtracker.android.ui.SegmentedControl
 import healthcare.app.fastingtracker.android.ui.state.MainUiState
 import kotlinx.coroutines.delay
-import org.koin.core.component.KoinComponent
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinComponent
+import java.time.YearMonth
 import kotlin.time.Duration.Companion.seconds
 
 class MainActivity : ComponentActivity(), KoinComponent {
@@ -388,7 +412,37 @@ class MainActivity : ComponentActivity(), KoinComponent {
 
     @Composable
     fun CalendarScreen() {
+        val currentMonth = remember { YearMonth.now() }
+        val startMonth = remember { currentMonth.minusMonths(100) }
+        val endMonth = remember { currentMonth.plusMonths(100) }
+        val daysOfWeek = remember { daysOfWeek() }
 
+        val state = rememberCalendarState(
+            startMonth = startMonth,
+            endMonth = endMonth,
+            firstVisibleMonth = currentMonth,
+            firstDayOfWeek = daysOfWeek.first(),
+            outDateStyle = OutDateStyle.EndOfGrid
+        )
+
+        Column(
+            modifier = Modifier.fillMaxSize()
+                .background(color = Color.White)
+                .padding(top = 10.dp)
+        ) {
+            HorizontalCalendar(
+                state = state,
+                dayContent = { day ->
+                    Day(day)
+                             },
+                monthHeader = {
+                    DaysOfWeekTitle(
+                        daysOfWeek = daysOfWeek,
+                        recentDisplay = state.firstVisibleMonth
+                    )
+                }
+            )
+        }
     }
 
     @Composable
