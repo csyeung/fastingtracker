@@ -3,6 +3,7 @@ package healthcare.app.fastingtracker.android.ui
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -42,6 +43,7 @@ fun SegmentedControl(
 
     Row(
         modifier = Modifier
+            .padding(horizontal = 10.dp)
     ) {
         items.forEachIndexed { index, item ->
             OutlinedButton(

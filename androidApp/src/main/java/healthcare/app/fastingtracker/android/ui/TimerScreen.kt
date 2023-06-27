@@ -2,17 +2,19 @@ package healthcare.app.fastingtracker.android.ui
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -55,15 +57,15 @@ fun TimerScreen(viewModel: MainViewModel) {
 
     Column(modifier = Modifier
         .fillMaxWidth()
-        .padding(
-            start = 5.dp,
-            end = 5.dp
+        .verticalScroll(
+            state = rememberScrollState()
         )
     ) {
         // タイトル表示
         Text(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(IntrinsicSize.Max)
                 .padding(
                     top = 10.dp,
                     bottom = 10.dp
@@ -74,14 +76,14 @@ fun TimerScreen(viewModel: MainViewModel) {
             textAlign = TextAlign.Center
         )
 
-        // TODO: 12:12 と 16:8 の選択肢を出せる
-//        SegmentedControl(
-//            items = options,
-//            useFixedWidth = true,
-//            cornerRadius = 20,
-//            itemWidth = 200.dp,
-//            onItemSelection = {}
-//        )
+        // 12:12 と 16:8 の選択
+        SegmentedControl(
+            items = options,
+            useFixedWidth = true,
+            cornerRadius = 20,
+            itemWidth = 200.dp,
+            onItemSelection = {}
+        )
 
         // 経過時間
         InformationDisplay(
@@ -107,8 +109,6 @@ fun TimerScreen(viewModel: MainViewModel) {
             text = record.value?.endTime ?: stringResource(R.string.trackerPlaceholderTime2)
         )
 
-        Spacer(modifier = Modifier.padding(20.dp))
-
         OutlinedButton(
             onClick = {
                 when (state.value) {
@@ -124,9 +124,11 @@ fun TimerScreen(viewModel: MainViewModel) {
             colors = ButtonDefaults.outlinedButtonColors(contentColor = colorResource(id = R.color.colorButtonBackGroundDisable)),
             contentPadding = PaddingValues(0.dp, 0.dp),
             modifier = Modifier
-                .padding(0.dp)
+                .padding(
+                    vertical = 10.dp
+                )
+                .fillMaxWidth(0.6f)
                 .height(52.dp)
-                .fillMaxWidth(0.5f)
                 .align(Alignment.CenterHorizontally),
         ) {
             Text(
