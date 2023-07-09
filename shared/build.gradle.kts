@@ -30,11 +30,13 @@ kotlin {
             dependencies {
                 implementation("io.insert-koin:koin-core:3.2.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.3")
                 // Data Store
                 implementation("androidx.datastore:datastore-preferences-core:1.1.0-alpha04")
                 implementation("androidx.datastore:datastore-core-okio:1.1.0-alpha04")
+                // SQLDelight
+                implementation("app.cash.sqldelight:runtime:2.0.0-rc02")
             }
         }
         val commonTest by getting {
@@ -45,6 +47,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("io.insert-koin:koin-android:3.2.0")
+                // SQLDelight
                 implementation("app.cash.sqldelight:android-driver:2.0.0-rc02")
             }
         }
@@ -80,6 +83,12 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 28
+    }
+}
+
+buildscript {
+    dependencies {
+        classpath("app.cash.sqldelight:gradle-plugin:2.0.0-rc02")
     }
 }
 
