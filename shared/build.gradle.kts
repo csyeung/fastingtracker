@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("app.cash.sqldelight") version "2.0.0-rc02"
     kotlin("plugin.serialization")
     id("kotlin-parcelize")
 }
@@ -44,6 +45,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("io.insert-koin:koin-android:3.2.0")
+                implementation("app.cash.sqldelight:android-driver:2.0.0-rc02")
             }
         }
         val androidUnitTest by getting
@@ -51,6 +53,11 @@ kotlin {
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
         val iosMain by creating {
+            dependencies {
+                // SQLDelight
+                implementation("app.cash.sqldelight:native-driver:2.0.0-rc02")
+            }
+
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
@@ -73,5 +80,15 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 28
+    }
+}
+
+sqldelight {
+    databases {
+        create("FastingTrackerDatabase") {
+            packageName.set("com.jonathan.fastingtracker")
+            dialect("app.cash.sqldelight:mysql-dialect:2.0.0-rc02")
+            generateAsync.set(true)
+        }
     }
 }

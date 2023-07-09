@@ -1,0 +1,9 @@
+CREATE TABLE healthInformation (
+    record_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    body_temp REAL,
+    body_weight REAL,
+    pulse_rate INTEGER,
+    sleep_time REAL
+);
+
+CREATE INDEX healthInformation_timestamp ON healthInformation(record_date);
