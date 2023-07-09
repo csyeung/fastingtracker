@@ -1,7 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("app.cash.sqldelight") version "2.0.0-rc02"
+    id("com.squareup.sqldelight")
     kotlin("plugin.serialization")
     id("kotlin-parcelize")
 }
@@ -14,7 +14,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -36,7 +36,7 @@ kotlin {
                 implementation("androidx.datastore:datastore-preferences-core:1.1.0-alpha04")
                 implementation("androidx.datastore:datastore-core-okio:1.1.0-alpha04")
                 // SQLDelight
-                implementation("app.cash.sqldelight:runtime:2.0.0-rc02")
+                implementation("com.squareup.sqldelight:coroutines-extensions:1.5.5")
             }
         }
         val commonTest by getting {
@@ -48,7 +48,7 @@ kotlin {
             dependencies {
                 implementation("io.insert-koin:koin-android:3.2.0")
                 // SQLDelight
-                implementation("app.cash.sqldelight:android-driver:2.0.0-rc02")
+                implementation("com.squareup.sqldelight:android-driver:1.5.5")
             }
         }
         val androidUnitTest by getting
@@ -58,7 +58,7 @@ kotlin {
         val iosMain by creating {
             dependencies {
                 // SQLDelight
-                implementation("app.cash.sqldelight:native-driver:2.0.0-rc02")
+                implementation("com.squareup.sqldelight:native-driver:1.5.5")
             }
 
             dependsOn(commonMain)
@@ -86,18 +86,8 @@ android {
     }
 }
 
-buildscript {
-    dependencies {
-        classpath("app.cash.sqldelight:gradle-plugin:2.0.0-rc02")
-    }
-}
-
 sqldelight {
-    databases {
-        create("FastingTrackerDatabase") {
-            packageName.set("com.jonathan.fastingtracker")
-            dialect("app.cash.sqldelight:mysql-dialect:2.0.0-rc02")
-            generateAsync.set(true)
-        }
+    database("FastingTrackerDatabase") {
+        packageName = "com.jonathan.fastingtracker"
     }
 }

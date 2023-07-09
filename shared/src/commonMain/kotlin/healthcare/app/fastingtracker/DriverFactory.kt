@@ -1,7 +1,7 @@
 package healthcare.app.fastingtracker
 
-import app.cash.sqldelight.db.SqlDriver
 import com.jonathan.fastingtracker.FastingTrackerDatabase
+import com.squareup.sqldelight.db.SqlDriver
 
 expect class DriverFactory {
     fun createDriver(): SqlDriver
@@ -9,9 +9,5 @@ expect class DriverFactory {
 
 fun createDatabase(driverFactory: DriverFactory): FastingTrackerDatabase {
     val driver = driverFactory.createDriver()
-    val database = FastingTrackerDatabase(driver)
-
-    // Database related functions
-
-    return database
+    return FastingTrackerDatabase(driver)
 }
