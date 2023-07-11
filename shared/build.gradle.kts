@@ -22,8 +22,11 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
+            binaryOption("bundleId", "healthcare.app.fastingtracker")
         }
     }
+
+    val sqlDelightVersion = "1.5.5"
 
     sourceSets {
         val commonMain by getting {
@@ -36,7 +39,8 @@ kotlin {
                 implementation("androidx.datastore:datastore-preferences-core:1.1.0-alpha04")
                 implementation("androidx.datastore:datastore-core-okio:1.1.0-alpha04")
                 // SQLDelight
-                implementation("com.squareup.sqldelight:coroutines-extensions:1.5.5")
+                implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
+                implementation("com.squareup.sqldelight:coroutines-extensions:$sqlDelightVersion")
             }
         }
         val commonTest by getting {
@@ -48,7 +52,7 @@ kotlin {
             dependencies {
                 implementation("io.insert-koin:koin-android:3.2.0")
                 // SQLDelight
-                implementation("com.squareup.sqldelight:android-driver:1.5.5")
+                implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
             }
         }
         val androidUnitTest by getting
@@ -58,7 +62,7 @@ kotlin {
         val iosMain by creating {
             dependencies {
                 // SQLDelight
-                implementation("com.squareup.sqldelight:native-driver:1.5.5")
+                implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
             }
 
             dependsOn(commonMain)

@@ -45,7 +45,7 @@ fun DaysOfWeekTitle(daysOfWeek: List<DayOfWeek>, recentDisplay: CalendarMonth) {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            for ((index, dayOfWeek) in daysOfWeek.withIndex()) {
+            for ((_, dayOfWeek) in daysOfWeek.withIndex()) {
                 Text(
                     modifier = Modifier.weight(1f),
                     textAlign = TextAlign.Center,
