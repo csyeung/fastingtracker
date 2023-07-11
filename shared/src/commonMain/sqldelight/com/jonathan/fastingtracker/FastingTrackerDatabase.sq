@@ -6,7 +6,16 @@ CREATE TABLE healthRecord (
     sleepTime REAL
 );
 
+CREATE TABLE fastingRecord (
+    recordDate TEXT DEFAULT CURRENT_TIMESTAMP,
+    fastingPeriod REAL,
+    fastingMemo TEXT
+);
+
 CREATE INDEX healthInformation_timestamp ON healthRecord(recordDate);
 
 insertSingleHealthRecord:
 INSERT INTO healthRecord(recordDate, bodyTemp, bodyWeight, pulseRate, sleepTime) VALUES (?, ?, ?, ?, ?);
+
+insertSingleFastingRecord:
+INSERT INTO fastingRecord(recordDate, fastingPeriod, fastingMemo) VALUES (?, ?, ?);

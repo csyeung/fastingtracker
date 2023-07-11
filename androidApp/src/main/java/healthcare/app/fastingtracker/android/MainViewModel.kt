@@ -2,6 +2,7 @@ package healthcare.app.fastingtracker.android
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jonathan.fastingtracker.FastingTrackerDatabase
 import healthcare.app.fastingtracker.android.ui.state.MainUiState
 import healthcare.app.fastingtracker.domain.model.FastingRecord
 import healthcare.app.fastingtracker.domain.usecase.Greeting
@@ -10,7 +11,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val greeting: Greeting) : ViewModel() {
+class MainViewModel(
+    private val greeting: Greeting,
+    private val database: FastingTrackerDatabase
+    ) : ViewModel() {
     private var _uiState = MutableStateFlow<MainUiState>(MainUiState.Empty)
     internal val uiState: StateFlow<MainUiState>
         get() = _uiState.asStateFlow()
