@@ -1,6 +1,5 @@
 package healthcare.app.fastingtracker.android.ui.state
 
-import healthcare.app.fastingtracker.domain.model.FastingRecord
 import healthcare.app.fastingtracker.domain.model.FastingResult
 
 /**

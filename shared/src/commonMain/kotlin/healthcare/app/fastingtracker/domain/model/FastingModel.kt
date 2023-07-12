@@ -8,7 +8,7 @@ import healthcare.app.fastingtracker.CommonParcelize
  * @since 2023-04-27
  */
 @CommonParcelize
-data class FastingRecord(
+data class FastingModel(
     val startTime: String? = null,
     val endTime: String? = null,
     val elapsedTime: String? = null,

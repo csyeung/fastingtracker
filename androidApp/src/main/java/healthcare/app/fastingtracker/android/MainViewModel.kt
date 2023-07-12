@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jonathan.fastingtracker.FastingTrackerDatabase
 import healthcare.app.fastingtracker.android.ui.state.MainUiState
-import healthcare.app.fastingtracker.domain.model.FastingRecord
+import healthcare.app.fastingtracker.domain.model.FastingModel
 import healthcare.app.fastingtracker.domain.usecase.Greeting
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,8 +19,8 @@ class MainViewModel(
     internal val uiState: StateFlow<MainUiState>
         get() = _uiState.asStateFlow()
 
-    private var _record = MutableStateFlow<FastingRecord?>(null)
-    internal val record: StateFlow<FastingRecord?>
+    private var _record = MutableStateFlow<FastingModel?>(null)
+    internal val record: StateFlow<FastingModel?>
         get() = _record.asStateFlow()
 
     internal fun fetchData() {
@@ -36,7 +36,7 @@ class MainViewModel(
 
     internal fun updateFasting() {
         viewModelScope.launch {
-            greeting.updateFastingRecord.collect {
+            greeting.updateFastingModel.collect {
                 _record.value = it
             }
         }

@@ -1,7 +1,7 @@
 package healthcare.app.fastingtracker.domain.usecase
 
 import healthcare.app.fastingtracker.Platform
-import healthcare.app.fastingtracker.domain.model.FastingRecord
+import healthcare.app.fastingtracker.domain.model.FastingModel
 import healthcare.app.fastingtracker.domain.repository.LocalDataStoreRepository
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +20,7 @@ class Greeting(private val platform: Platform, private val dataStore: LocalDataS
         private const val DEFAULT_FASTING_PERIOD: Int = 16
     }
 
-    val updateFastingRecord: Flow<FastingRecord> =
+    val updateFastingModel: Flow<FastingModel> =
         flow {
             coroutineScope {
                 dataStore.startTrackingTime.collect {
@@ -35,7 +35,7 @@ class Greeting(private val platform: Platform, private val dataStore: LocalDataS
                             DEFAULT_FASTING_PERIOD * 3600 - remainingTime.toInt(DurationUnit.SECONDS)
 
                         emit(
-                            FastingRecord(
+                            FastingModel(
                                 startTime = getFormattedTimeString(startTime),
                                 endTime = getFormattedTimeString(endTime),
                                 elapsedTime = formatElapsedTime(elapsedTime),

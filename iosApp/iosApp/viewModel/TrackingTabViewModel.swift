@@ -35,8 +35,8 @@ class TrackingTabViewModel : ObservableObject {
     }
     
     func updateFasting() {
-        self.useCase.updateFastingRecord.collect(
-            collector: FlowCollector<FastingRecord> { record in
+        self.useCase.updateFastingModel.collect(
+            collector: FlowCollector<FastingModel> { record in
                 self.remainingTime = record.remainingTime
                 self.elapsedTime = record.elapsedTime
                 self.startTime = record.startTime
